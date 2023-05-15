@@ -18,7 +18,7 @@
 
 ## Algorithms
 
-1. Sorting (Quick, Merge Sort, Bucket sort, Selection sort, Bugo sort)
+1. Sorting (Quick, Merge Sort, Bucket sort, Selection sort, Bugo sort, Insertion sort, Radix sort)
 2. Searching (Linear search, Binary Search)
 3. Tree Transversal (preorder, uniorder, postorder)
 4. BFS and DFS (Breath First Search and Depth First Search)
