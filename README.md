@@ -9,7 +9,7 @@
   - O(1) - constant time
   - O(log n)
   - O(n)
-  - O(nlog n)
+  - O(n log n)
   - O(n^2)
   - O(2^n)
   - O(n!)
