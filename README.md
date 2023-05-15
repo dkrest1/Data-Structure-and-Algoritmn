@@ -1,8 +1,33 @@
-# Data-Structure-and-Algoritmn-with-Python
+# Data-Structure-and-Algoritmn
 
-- This Repo contain code of some basic data structure and algorithms in python
+- This Repo contain code on basic data structure and algorithms in Python and Javascript.
 
-- This Repo contain code of some basic problems in python
+## Big O Notation
+
+- Time Complexity
+
+  - O(1) - constant time
+  - O(log n)
+  - O(n)
+  - O(nlog n)
+  - O(n^2)
+  - O(2^n)
+  - O(n!)
+
+- Space Complexity
+
+## Algorithms
+
+1. Sorting (Quick, Merge Sort, Bucket sort, Selection sort, Bugo sort)
+2. Searching (Linear search, Binary Search)
+3. Tree Transversal (preorder, uniorder, postorder)
+4. BFS and DFS (Breath First Search and Depth First Search)
+5. Recursion
+6. Divide and Conquer
+7. Greedy Algorithm
+8. Brute Force Algorithn
+9. Dynamic algorithm
+10. Finding all Permutation and Combination
 
 ## Data Structure
 
@@ -17,16 +42,3 @@
 9. Heaps (Min and Max Heaps)
 10. Union - Find
 11. Trees
-
-## Algorithms
-
-1. Sorting (Quick, Merge Sort, Bucket sort, Selection sort, Bugo sort)
-2. Searching (Linear search, Binary Search)
-3. Tree Transversal (preorder, uniorder, postorder)
-4. BFS and DFS (Breath First Search and Depth First Search)
-5. Recursion
-6. Divide and Conquer
-7. Greedy Algorithm
-8. Brute Force Algorithn
-9. Dynamic algorithm
-10. Finding all Permutation and Combination
