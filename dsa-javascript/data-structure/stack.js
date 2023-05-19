@@ -49,6 +49,12 @@ class Stack {
     }
 }
 
+//BIG O
+// insertion O(1)
+//searching O(n)
+//removal O(1)
+//access O(n)
+
 let result = new Stack();
 result.push("one");
 result.push("two");

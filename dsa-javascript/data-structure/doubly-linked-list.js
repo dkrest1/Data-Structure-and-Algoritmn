@@ -152,6 +152,12 @@ class DoublyLinkedList {
     }
 }
 
+//BIG O
+// insertion O(1)
+//searching O(n)
+//removal O(1)
+//access O(n)
+
 const list = new Node("one");
 list.next = new Node("two");
 // list.next.prev = list;

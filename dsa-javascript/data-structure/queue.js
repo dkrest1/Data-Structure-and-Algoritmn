@@ -47,6 +47,12 @@ class Queue {
     }
 }
 
+//BIG O
+// insertion O(1)
+//searching O(n)
+//removal O(1)
+//access O(n)
+
 const queue = new Queue();
 queue.enqueue("one");
 queue.enqueue("two");

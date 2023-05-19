@@ -150,8 +150,13 @@ class SinglyLinkedList {
         }
         return this;
     }
-
 }
+
+//BIG O
+// insertion O(1)
+//searching O(n)
+//removal O(1)
+//access O(n)
 
 const result1 = new SinglyLinkedList()
 result1.push("hello");
