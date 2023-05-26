@@ -24,6 +24,64 @@ class Graph {
         delete this.adjancencyList[vertex]
     }
 
+    depthFirstRecursive(start) {
+        let result = [];
+        let visited = {};
+        let adjancencyList = this.adjancencyList;
+        (function dfs(vertex) {
+            if (!vertex) return null;
+            visited[vertex] = true;
+            result.push(vertex);
+            adjancencyList[vertex].forEach(neighbour => {
+                if (!visited[neighbour]) {
+                    return dfs(neighbour);
+                }
+            })
+        })(start);
+        return result
+    }
+
+    depthFirstIterative(start) {
+        let stack = [start];
+        let visited = {};
+        let result = [];
+        let currentVertex;
+        visited[start] = true;
+        while (stack.length) {
+            currentVertex = stack.pop();
+            result.push(currentVertex);
+            this.adjancencyList[currentVertex].forEach(neighbour => {
+                if (!visited[neighbour]) {
+                    visited[neighbour] = true;
+                    stack.push(neighbour);
+                }
+            })
+        }
+        return result;
+    }
+
+    breathFirstIterative(start) {
+        let result = [];
+        let visited = {};
+        let currentVertex;
+        let queue = [start];
+        visited[start] = true;
+
+        while (queue.length) {
+            currentVertex = queue.shift();
+            result.push(currentVertex);
+            this.adjancencyList[currentVertex].forEach(neighbour => {
+                if (!visited[neighbour]) {
+                    visited[neighbour] = true;
+                    queue.push(neighbour);
+
+                }
+            })
+        }
+        return result;
+
+    }
+
 }
 
 const graph = new Graph();
@@ -35,7 +93,9 @@ graph.addEdge("United Kingdom", "Canada");
 graph.addEdge("Nigeria", "Canada");
 // graph.removeEdge("Nigeria", "United Kingdom");
 // graph.removeEdge("Canada", "Nigeria");
-graph.removeVertex("Canada");
-graph.removeVertex("Nigeria");
-
-console.log(graph);
+// graph.removeVertex("Canada");
+// graph.removeVertex("Nigeria");
+// console.log(graph.depthFirstIterative("Nigeria"));
+// console.log(graph.depthFirstRecursive("Nigeria"));
+console.log(graph.breathFirstIterative("Canada"));
+// console.log(graph);
