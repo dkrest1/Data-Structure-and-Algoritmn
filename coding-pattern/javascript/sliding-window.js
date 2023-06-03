@@ -169,5 +169,7 @@ function findLongestSubStringWithKChar(str, k) {
     return maxSubString
 }
 
+//time complexity: O(n)
+
 let result6 = findLongestSubStringWithKChar("cbbebi", 3);
 console.log("longgestSubStringWithDistinctChar", result6)

@@ -172,5 +172,6 @@ def findLongestSubString(str, k):
     return maxSubString
 
 
+# time complexity: O(n)
 result5 = findLongestSubString("cbbebi", 3)
 print("longestSubString", result5)
