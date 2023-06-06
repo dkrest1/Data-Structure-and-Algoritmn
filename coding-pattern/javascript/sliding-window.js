@@ -173,3 +173,132 @@ function findLongestSubStringWithKChar(str, k) {
 
 let result6 = findLongestSubStringWithKChar("cbbebi", 3);
 console.log("longgestSubStringWithDistinctChar", result6)
+
+// # ///////////////////////////////////////////// FRUITS INTO BASKET /////////////////////////////////////////////////////////////////////////////
+// # PROBLEM STATEMENT
+// # Given an array of characters where each character represents a fruit tree, you are given two baskets and your goal is to put maximum number of fruits in each basket. The only restriction is that each basket can have only one type of fruit.
+
+// # You can start with any tree, but once you have started you can’t skip a tree. You will pick one fruit from each tree until you cannot, i.e., you will stop when you have to pick from a third fruit type.
+
+// # Write a function to return the maximum number of fruits in both the baskets.
+
+// # Example 1:
+
+// # Input: Fruit=['A', 'B', 'C', 'A', 'C']
+// # Output: 3
+// # Explanation: We can put 2 'C' in one basket and one 'A' in the other from the subarray ['C', 'A', 'C']
+// # Example 2:
+
+// # Input: Fruit=['A', 'B', 'C', 'B', 'B', 'C']
+// # Output: 5
+// # Explanation: We can put 3 'B' in one basket and two 'C' in the other basket.
+// # This can be done if we start with the second letter: ['B', 'C', 'B', 'B', 'C']
+
+function fruitInBasket(fruitArr) {
+    let maxLength = 0;
+    let start = 0;
+    let fruitObj = {};
+    for (let i = 0; i < fruitArr.length; i++) {
+        let right_fruit = fruitArr[i]
+        fruitObj[right_fruit] = (fruitObj[right_fruit] || 0) + 1
+        while (Object.keys(fruitObj).length > 2) {
+            let left_fruit = fruitArr[start]
+            fruitObj[left_fruit] -= 1
+            if (fruitObj[left_fruit] === 0) delete fruitObj[left_fruit]
+            start += 1
+        }
+
+        maxLength = Math.max(maxLength, i - start + 1)
+    }
+
+    return maxLength
+}
+
+// time complexity: O(n)
+
+let result7 = fruitInBasket(['A', 'B', 'C', 'A', 'C'])
+console.log("fruitInBasket =", result7)
+
+// # ////////////////////////////////////////////// NO REPEAT SUBSTRING //////////////////////////////////////////
+// # Problem Statement #
+// # Given a string, find the length of the longest substring which has no repeating characters.
+
+// # Example 1:
+
+// # Input: String="aabccbb"
+// # Output: 3
+// # Explanation: The longest substring without any repeating characters is "abc".
+// # Example 2:
+
+// # Input: String="abbbb"
+// # Output: 2
+// # Explanation: The longest substring without any repeating characters is "ab".
+// # Example 3:
+
+// # Input: String="abccde"
+// # Output: 3
+// # Explanation: Longest substrings without any repeating characters are "abc" & "cde".
+
+function maxOfNoRepeatingStr(str) {
+    let start = 0;
+    let maxLength = 0;
+    let obj = {};
+    for (let i = 0; i < str.length; i++) {
+        let char = str[i]
+        if (char in obj) {
+            start = Math.max(start, obj[char] + 1)
+        }
+        obj[char] = i
+        maxLength = Math.max(maxLength, i - start + 1)
+    }
+    return maxLength
+}
+// time complexity = O(n)
+let result8 = maxOfNoRepeatingStr("abbbb")
+console.log("maxOfNoRepeatingString =", result8)
+
+////////////////////////////////////////// Longest Substring with Same Letters after Replacement //////////////////////
+
+// # Problem Statement #
+// # Given a string with lowercase letters only, if you are allowed to replace no more than ‘k’ letters with any letter, find the length of the longest substring having the same letters after replacement.
+
+// # Example 1:
+
+// # Input: String="aabccbb", k=2
+// # Output: 5
+// # Explanation: Replace the two 'c' with 'b' to have a longest repeating substring "bbbbb".
+// # Example 2:
+
+// # Input: String="abbcb", k=1
+// # Output: 4
+// # Explanation: Replace the 'c' with 'b' to have a longest repeating substring "bbbb".
+// # Example 3:
+
+// # Input: String="c", k=1
+// # Output: 3
+// # Explanation: Replace the 'b' or 'd' with 'c' to have the longest repeating substring "ccc".
+
+function longestSubStringWithSameLetterAfterReplacement(str, k) {
+    let start = 0;
+    let maxRepeatedLetterCount = 0;
+    let maxLength = 0;
+    let obj = {};
+    for (let i = 0; i < str.length; i++) {
+        let rightStr = str[i]
+        obj[rightStr] = (obj[rightStr] || 0) + 1
+        maxRepeatedLetterCount = Math.max(maxRepeatedLetterCount, obj[rightStr])
+
+        if (i - start + 1 - maxRepeatedLetterCount > k) {
+            left_str = str[start]
+            obj[left_str] - + 1
+            start += 1
+        }
+        maxLength = Math.max(maxLength, i - start + 1)
+    }
+
+    return maxLength
+}
+
+// time complexity = O(n)
+let result9 = longestSubStringWithSameLetterAfterReplacement("c", 1)
+console.log("lonfestSubStringWithSameLetterAfterReplacement =", result9)

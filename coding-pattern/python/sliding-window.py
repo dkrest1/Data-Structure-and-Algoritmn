@@ -175,3 +175,135 @@ def findLongestSubString(str, k):
 # time complexity: O(n)
 result5 = findLongestSubString("cbbebi", 3)
 print("longestSubString", result5)
+
+
+# ///////////////////////////////////////////// FRUITS INTO BASKET /////////////////////////////////////////////////////////////////////////////
+# PROBLEM STATEMENT
+# Given an array of characters where each character represents a fruit tree, you are given two baskets and your goal is to put maximum number of fruits in each basket. The only restriction is that each basket can have only one type of fruit.
+
+# You can start with any tree, but once you have started you can’t skip a tree. You will pick one fruit from each tree until you cannot, i.e., you will stop when you have to pick from a third fruit type.
+
+# Write a function to return the maximum number of fruits in both the baskets.
+
+# Example 1:
+
+# Input: Fruit=['A', 'B', 'C', 'A', 'C']
+# Output: 3
+# Explanation: We can put 2 'C' in one basket and one 'A' in the other from the subarray ['C', 'A', 'C']
+# Example 2:
+
+# Input: Fruit=['A', 'B', 'C', 'B', 'B', 'C']
+# Output: 5
+# Explanation: We can put 3 'B' in one basket and two 'C' in the other basket.
+# This can be done if we start with the second letter: ['B', 'C', 'B', 'B', 'C']
+
+def fruits_in_basket(fruitsArr):
+    max_length = 0
+    start = 0
+    fruit_frequency = {}
+    for i in range(len(fruitsArr)):
+        right_fruit = fruitsArr[i]
+        if right_fruit not in fruit_frequency:
+            fruit_frequency[right_fruit] = 0
+        fruit_frequency[right_fruit] += 1
+
+        while (len(fruit_frequency)) > 2:
+            left_fruit = fruitsArr[start]
+            fruit_frequency[left_fruit] -= 1
+            if fruit_frequency[left_fruit] == 0:
+                del fruit_frequency[left_fruit]
+            start += 1
+        max_length = max(max_length, i - start + 1)
+    return max_length
+
+# time complexity: O(n)
+
+
+result6 = fruits_in_basket(['A', 'B', 'C', 'B', 'B', 'C'])
+print("fruits in a basket =", result6)
+
+# ////////////////////////////////////////////// NO REPEAT SUBSTRING //////////////////////////////////////////
+# Problem Statement #
+# Given a string, find the length of the longest substring which has no repeating characters.
+
+# Example 1:
+
+# Input: String="aabccbb"
+# Output: 3
+# Explanation: The longest substring without any repeating characters is "abc".
+# Example 2:
+
+# Input: String="abbbb"
+# Output: 2
+# Explanation: The longest substring without any repeating characters is "ab".
+# Example 3:
+
+# Input: String="abccde"
+# Output: 3
+# Explanation: Longest substrings without any repeating characters are "abc" & "cde".
+
+
+def max_no_repeatin_subString(str):
+    maxLength = 0
+    start = 0
+    obj = {}
+    for i in range(len(str)):
+        right_string = str[i]
+        if right_string in obj:
+            start = max(start, obj[right_string] + 1)
+        obj[right_string] = i
+        maxLength = max(maxLength, i - start + 1)
+    return maxLength
+
+# time complexity = O(n)
+
+
+result7 = max_no_repeatin_subString("abccde")
+print("max_of_no_repeating_substring =", result7)
+
+
+# //////////////////////////////////////////// Longest Substring with Same Letters after Replacement //////////////////////
+
+# Problem Statement #
+# Given a string with lowercase letters only, if you are allowed to replace no more than ‘k’ letters with any letter, find the length of the longest substring having the same letters after replacement.
+
+# Example 1:
+
+# Input: String="aabccbb", k=2
+# Output: 5
+# Explanation: Replace the two 'c' with 'b' to have a longest repeating substring "bbbbb".
+# Example 2:
+
+# Input: String="abbcb", k=1
+# Output: 4
+# Explanation: Replace the 'c' with 'b' to have a longest repeating substring "bbbb".
+# Example 3:
+
+# Input: String="c", k=1
+# Output: 3
+# Explanation: Replace the 'b' or 'd' with 'c' to have the longest repeating substring "ccc".
+def longest_sub_string_with_same_letter_after_replacement(str, k):
+    start = 0
+    max_length = 0
+    max_repeated_letter_count = 0
+    obj = {}
+
+    for i in range(len(str)):
+        right_str = str[i]
+        if right_str not in obj:
+            obj[right_str] = 0
+        obj[right_str] += 1
+        max_repeated_letter_count = max(
+            max_repeated_letter_count, obj[right_str])
+
+        if(i - start + 1 - max_repeated_letter_count > k):
+            left_str = str[start]
+            obj[left_str] -= 1
+            start += 1
+        max_length = max(max_length, i - start + 1)
+    return max_length
+# time complexity  = O(n)
+
+
+result8 = longest_sub_string_with_same_letter_after_replacement("c", 1)
+print("Longest_sub_string_with_same_letter_after_replacement =", result8)
