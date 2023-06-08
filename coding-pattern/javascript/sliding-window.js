@@ -302,3 +302,46 @@ function longestSubStringWithSameLetterAfterReplacement(str, k) {
 // time complexity = O(n)
 let result9 = longestSubStringWithSameLetterAfterReplacement("c", 1)
 console.log("lonfestSubStringWithSameLetterAfterReplacement =", result9)
+
+// # ///////////////////////////////////////// Longest Subarray with Ones after Replacement //////////////////////////
+// #
+// # Problem Statement #
+// # Given an array containing 0s and 1s, if you are allowed to replace no more than ‘k’ 0s with 1s, find the length of the longest contiguous subarray having all 1s.
+
+// # Example 1:
+
+// # Input: Array=[0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1], k=2
+// # Output: 6
+// # Explanation: Replace the '0' at index 5 and 8 to have the longest contiguous subarray of 1s having length 6.
+// # Example 2:
+
+// # Input: Array=[0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1], k=3
+// # Output: 9
+// # Explanation: Replace the '0' at index 6, 9, and 10 to have the longest contiguous subarray of 1s having length 9.
+
+function longestSubArrayWithOnesReplacement(arr, k) {
+    let start = 0,
+        maxLength = 0,
+        maxOneCount = 0;
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] === 1) {
+            maxOneCount += 1;
+        }
+
+        if ((i - start + 1 - maxOneCount) > k) {
+            if (arr[start] === 1) {
+                maxOneCount -= 1;
+            }
+            start += 1
+        }
+        maxLength = Math.max(maxLength, i - start + 1)
+    }
+    return maxLength
+}
+
+let result10 = longestSubArrayWithOnesReplacement(
+    [0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1], 2)
+console.log("longestSubStringWithSameLetterAfterReplacement =", result10)
+
+
+

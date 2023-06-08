@@ -307,3 +307,85 @@ def longest_sub_string_with_same_letter_after_replacement(str, k):
 
 result8 = longest_sub_string_with_same_letter_after_replacement("c", 1)
 print("Longest_sub_string_with_same_letter_after_replacement =", result8)
+
+# ///////////////////////////////////////// Longest Subarray with Ones after Replacement //////////////////////////
+#
+# Problem Statement #
+# Given an array containing 0s and 1s, if you are allowed to replace no more than ‘k’ 0s with 1s, find the length of the longest contiguous subarray having all 1s.
+
+# Example 1:
+
+# Input: Array=[0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1], k=2
+# Output: 6
+# Explanation: Replace the '0' at index 5 and 8 to have the longest contiguous subarray of 1s having length 6.
+# Example 2:
+
+# Input: Array=[0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1], k=3
+# Output: 9
+# Explanation: Replace the '0' at index 6, 9, and 10 to have the longest contiguous subarray of 1s having length 9.
+
+
+def longest_subArray_with_ones_replacement(arr, k):
+    max_length, max_one_count = 0, 0
+    start = 0
+    for i in range(len(arr)):
+        if arr[i] == 1:
+            max_one_count += 1
+        if(i - start + 1 - max_one_count) > k:
+            if arr[start] == 1:
+                max_one_count -= 1
+                start += 1
+        max_length = max(max_length, i - start + 1)
+    return max_length
+
+
+result9 = longest_sub_string_with_same_letter_after_replacement(
+    [0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1], 3)
+print("longestSubStringWithSameLetterAfterReplacement =", result9)
+
+# /////////////////////////////////// CHALLENGE ///////////////////////////////////
+# ///////////////////////////////// Permutation in a String ///////////////////////////////
+# Given a string and a pattern, find out if the string contains any permutation of the pattern.
+
+# Permutation is defined as the re-arranging of the characters of the string. For example, “abc” has the following six permutations:
+
+# abc
+# acb
+# bac
+# bca
+# cab
+# cba
+# If a string has ‘n’ distinct characters it will have
+# !
+# n! permutations.
+
+# Example 1:
+
+# Input: String="oidbcaf", Pattern="abc"
+# Output: true
+# Explanation: The string contains "bca" which is a permutation of the given pattern.
+# Example 2:
+
+# Input: String="odicf", Pattern="dc"
+# Output: false
+# Explanation: No permutation of the pattern is present in the given string as a substring.
+# Example 3:
+
+# Input: String="bcdxabcdy", Pattern="bcdyabcdx"
+# Output: true
+# Explanation: Both the string and the pattern are a permutation of each other.
+# Example 4:
+
+# Input: String="aaacb", Pattern="abc"
+# Output: true
+# Explanation: The string contains "acb" which is a permutation of the given pattern.
+
+
+def permutation_in_a_string(str, ptn):
+    start = 0
+    obj = {}
+    for i in range(len(str)):
+        right_string = str[i]
+        if right_string not in obj:
+            obj[right_string] = 0
+        obj[right_string] += 1
