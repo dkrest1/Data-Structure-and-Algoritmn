@@ -381,11 +381,36 @@ print("longestSubStringWithSameLetterAfterReplacement =", result9)
 # Explanation: The string contains "acb" which is a permutation of the given pattern.
 
 
-def permutation_in_a_string(str, ptn):
-    start = 0
+def permutation_in_a_string(str, pattern):
     obj = {}
+    start = 0
+    matched = 0
+
+    for i in pattern:
+        if i not in obj:
+            obj[i] = 0
+            obj[i] += 1
+    
     for i in range(len(str)):
-        right_string = str[i]
-        if right_string not in obj:
-            obj[right_string] = 0
-        obj[right_string] += 1
+        right_char = str[i]
+        if right_char in obj:
+            obj[right_char] -= 1
+
+            if obj[right_char] == 0:
+                matched += 1
+        if matched == len(obj):
+            return True
+        
+        if i >= len(pattern) - 1:
+            left_char = str[start]
+            start += 1
+            if left_char in obj:
+                if obj[left_char] == 0:
+                    matched -= 1
+                obj[left_char] += 1
+
+    return False
+    
+
+result10 = permutation_in_a_string("bcdxabcdy", "bcdyabcdx")
+print("permutationInAString", result10)
