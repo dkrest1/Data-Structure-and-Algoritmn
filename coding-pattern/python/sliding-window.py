@@ -414,3 +414,5 @@ def permutation_in_a_string(str, pattern):
 
 result10 = permutation_in_a_string("bcdxabcdy", "bcdyabcdx")
 print("permutationInAString", result10)
+
+# ///////////////////////////////// 
