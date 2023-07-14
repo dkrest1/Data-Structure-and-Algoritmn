@@ -85,6 +85,9 @@ result_3 = array_non_duplicate([2, 2, 2, 11])
 # Input: [-3, -1, 0, 1, 2]
 # Output: [0 1 1 4 9]
 
+# /////////////////////////////////////// Make Square of Arr input in sorted order ///////////////////////////////
+# problem statement
+
 
 def make_square_of_input_arr(arr):
     n = len(arr)
@@ -102,8 +105,61 @@ def make_square_of_input_arr(arr):
         highestSquareIdx -= 1
     return squares
 
-
 result_4 = make_square_of_input_arr([-3, -1, 0, 1, 2])
+
+# /////////////////////////////////////// Make Square of Arr input in sorted order ///////////////////////////////
+# problem statement
+# Given an array of unsorted numbers, find all unique triplets in it that add up to zero.
+
+# Example 1:
+
+# Input: [-3, 0, 1, 2, -1, 1, -2]
+# Output: [-3, 1, 2], [-2, 0, 2], [-2, 1, 1], [-1, 0, 1]
+# Explanation: There are four unique triplets whose sum is equal to zero.
+# Example 2:
+
+# Input: [-5, 2, -1, -2, 3]
+# Output: [[-5, 2, 3], [-2, -1, 3]]
+# Explanation: There are two unique triplets whose sum is equal to zero.
+
+
+def search_tripplet(arr):
+   arr.sort()
+   tripplet = []
+   for i in range(len(arr)):
+       
+       if i > 0 and arr[i] == arr[i-1]:
+           continue
+       search_pair(arr, -arr[i], i+1, tripplet)
+   return tripplet
+       
+
+
+def search_pair(arr, target_sum, left, tripplet):
+    right = len(arr)- 1
+    while (left < right):
+        current_sum = arr[left] + arr[right]
+        if current_sum == target_sum:
+            tripplet.append([-target_sum, arr[right], arr[left]])
+            left += 1
+            right -= 1
+            while left < right and arr[left] == arr[left - 1]:
+                left += 1
+            while left < right and arr[right] == arr[right + 1]:
+                right -= 1
+        elif target_sum > current_sum:
+            left += 1
+        else:
+            right -= 1
+
+result_5 = search_tripplet([-3, 0, 1, 2, -1, 1, -2])
+
+    
+
+
+
+
+
 
 
 def main():
@@ -111,6 +167,7 @@ def main():
     print("example_two: ", result_2)
     print("example_three", result_3)
     print("example_4", result_4)
+    print("example_5", result_5)
 
 
 main()
