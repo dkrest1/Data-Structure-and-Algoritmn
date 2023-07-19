@@ -1,3 +1,5 @@
+import math
+import sys
 # Two Pointers
 # /////////////////// Problem Statement /////////////////////
 # Given an array of sorted numbers and a target sum, find a pair in the array whose sum is equal to the given target.
@@ -107,7 +109,7 @@ def make_square_of_input_arr(arr):
 
 result_4 = make_square_of_input_arr([-3, -1, 0, 1, 2])
 
-# /////////////////////////////////////// Make Square of Arr input in sorted order ///////////////////////////////
+# /////////////////////////////////////// Tripplet Sum of an Array To Zero ///////////////////////////////
 # problem statement
 # Given an array of unsorted numbers, find all unique triplets in it that add up to zero.
 
@@ -154,11 +156,51 @@ def search_pair(arr, target_sum, left, tripplet):
 
 result_5 = search_tripplet([-3, 0, 1, 2, -1, 1, -2])
 
-    
 
 
+#//////////////////////////////// Triplet Sum Close To a Target ////////////////////////////////////////////////
+# Problem Statement #
+# Given an array of unsorted numbers and a target number, find a triplet in the array whose sum is as close to the target number as possible, return the sum of the triplet. If there are more than one such triplet, return the sum of the triplet with the smallest sum.
 
+# Example 1:
 
+# Input: [-2, 0, 1, 2], target=2
+# Output: 1
+# Explanation: The triplet [-2, 1, 2] has the closest sum to the target.
+# Example 2:
+
+# Input: [-3, -1, 1, 2], target=1
+# Output: 0
+# Explanation: The triplet [-3, 1, 2] has the closest sum to the target.
+# Example 3:
+
+# Input: [1, 0, 1, 1], target=100
+# Output: 3
+# Explanation: The triplet [1, 1, 1] has the closest sum to the target.
+
+def closest_triplet_sum(arr, targetSum):
+    #sort arr
+    arr.sort()
+    closeSum = sys.maxsize
+    for i in range(len(arr)):
+        left = i + 1
+        right = len(arr) - 1
+        while(left < right):
+            target_diff = targetSum - arr[i] - arr[left] - arr[right]
+            if target_diff == 0:
+                return targetSum - target_diff
+            
+            if abs(target_diff) < abs(closeSum):
+                closeSum = target_diff
+            
+            if target_diff > 0:
+                left += 1
+            else:
+                right -=  1
+                
+    return targetSum - closeSum
+
+result_6 = closest_triplet_sum([1, 0, 1, 1], 100)
 
 
 
@@ -168,6 +210,7 @@ def main():
     print("example_three", result_3)
     print("example_4", result_4)
     print("example_5", result_5)
+    print("example_6", result_6)
 
 
 main()
