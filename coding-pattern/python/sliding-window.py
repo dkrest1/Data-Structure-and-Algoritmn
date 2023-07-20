@@ -71,7 +71,6 @@ print("maxSubArrBruteForce =", result2)
 
 # /////////////////////////////////////////// SLINGING WINDOW ////////////////////////////////////////
 
-
 def maxSubSlidingWindow(arr, k):
     max_sum = 0
     start, sum = 0, 0
