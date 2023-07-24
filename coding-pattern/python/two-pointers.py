@@ -241,6 +241,41 @@ def search_pair_less(arr, target_sum, first):
 result_7 = triplet_less_than_target_sum([-1, 0, 2, 3], 3)
 
 
+#//////////////////////////////// Dutch National Flag Problem (medium) ////////////////////////////////////////////////
+# Problem Statement #
+# Given an array containing 0s, 1s and 2s, sort the array in-place. You should treat numbers of the array as objects, hence, we can’t count 0s, 1s, and 2s to recreate the array.
+
+# The flag of the Netherlands consists of three colors: red, white and blue; and since our input array also consists of three different numbers that is why it is called Dutch National Flag problem.
+
+# Example 1:
+
+# Input: [1, 0, 2, 1, 0]
+# Output: [0 0 1 1 2]
+# Example 2:
+
+# Input: [2, 2, 0, 1, 2, 0]
+# Output: [0 0 1 2 2 2 ]
+
+def dutch_national_flag(arr):
+    low, high = 0, len(arr) - 1
+    i = 0
+    while(i <= high):
+        if arr[i] == 0:
+            arr[i], arr[low] = arr[low], arr[i]
+            i += 1
+            low += 1
+        elif arr[i] == 1:
+            i += 1
+        else:
+            arr[high], arr[i] = arr[i], arr[high]
+            high -= 1
+
+def result8(arr):
+    dutch_national_flag(arr)
+    return arr
+
+result_8 = result8([2, 2, 0, 1, 2, 0])
+
 
 def main():
     print("example_one: ", result_1)
@@ -250,6 +285,6 @@ def main():
     print("example_5", result_5)
     print("example_6", result_6)
     print("example_7", result_7)
-
+    print("example_8", result_8)
 
 main()
