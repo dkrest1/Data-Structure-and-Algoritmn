@@ -9,9 +9,7 @@ class Node:
     def __repr__(self) -> str:
         return "<Node: {}>".format(self.data)
 
-
 class Linkedlist:
-
     def __init__(self) -> None:
         self.head = None
 
@@ -183,8 +181,8 @@ l.add(9)
 # print(l.__repr__())
 # print(l.node_at_index(2))
 
-a = 1
-if a != 1:
-    print(True)
+# a = 1
+# if a != 1:
+#     print(True)
 
 ###########################################################################################################
