@@ -61,9 +61,125 @@ def result_1():
     print("LinkedList has cycle and cycle count is", str(has_cycle(head)))
 
 
+# //////////////////////////////////Start of LinkedList Cycle (medium) /////////////////////////////////////////////
+# Problem Statement #
+# Given the head of a Singly LinkedList that contains a cycle, write a function to find the starting node of the cycle.
+class Node2:
+    def __init__(self, value, next=None):
+        self.value = value
+        self.next = next
+
+    def print_list(self):
+        temp = self
+        while self is not None:
+            print(temp.value, end="")
+            temp = temp.next
+        print()
+
+def find_cycle(head):
+    cycle_length = 0
+    slow, fast = head,head
+    while fast is not None and fast.next is not None:
+        fast = fast.next.next
+        slow = slow.next
+        
+        if slow  == fast:
+            cycle_length = find_cycle_length(slow)
+            break
+    return find_start(head, cycle_length)
+
+def find_cycle_length(slow):
+    cycle_length = 0
+    current = slow
+    while True:
+        current = current.next
+        cycle_length += 1
+        if current == slow:
+            break
+    return cycle_length
+        
+def find_start(head, cycle_length):
+    pointer_1, pointer_2 = head, head
+    while cycle_length > 0:
+        pointer_2 = pointer_2.next
+        cycle_length -= 1
+
+    while pointer_1 != pointer_2:
+        pointer_1 = pointer_1.next
+        pointer_2 = pointer_2.next
+
+    return pointer_1
+
+def result_2():
+    head = Node2(1)
+    head.next = Node2(2)
+    head.next.next = Node2(3)
+    head.next.next.next = Node2(4)
+    head.next.next.next.next = Node2(5)
+    head.next.next.next.next.next = Node2(6)
+
+    head.next.next.next.next.next.next = head.next.next
+    print("LinkedList cycle start", str(find_cycle(head).value))
+
+    head.next.next.next.next.next.next = head.next.next.next
+    print("LinkedList cycle start", str(find_cycle(head).value))  
+
+    head.next.next.next.next.next = head
+
+    print("LinkedList cycle start", str(find_cycle(head).value))    
+
+# /////////////////////////////////////////Happy Number (medium)//////////////////////////////////////////////////////
+
+# Problem Statement #
+# Any number will be called a happy number if, after repeatedly replacing it with a number equal to the sum of the square of all of its digits, leads us to number ‘1’. All other (not-happy) numbers will never reach ‘1’. Instead, they will be stuck in a cycle of numbers which does not include ‘1’.
+
+# Example 1:
+
+# Input: 23   
+# Output: true (23 is a happy number)  
+# Explanations: Here are the steps to find out that 23 is a happy number:
+# 1. 2^2 + 3^2 = 4 + 9 = 13
+# 2. 1^2 + 3^2 = 1 + 9 = 10
+# 3. 1^2 + 0^2 = 1 (which is happy number)
+
+# Example 2:
+
+# Input: 12   
+# Output: false (12 is not a happy number)  
+# Explanations: Here are the steps to find out that 12 is not a happy number:
+# 1. 1^2 + 2^2 = 1 + 4 = 5
+# 2. 5^2 = 25
+# 3. 2^2 + 5^2 = 4 + 25 = 29
+# 4. 2^2 + 9^2 = 4 + 81 = 85
+# 5. 8^2 + 5^2 = 64 + 25 = 89
+
+# Step ‘13’ leads us back to step ‘5’ as the number becomes equal to ‘89’, this means that we can never reach ‘1’, therefore, ‘12’ is not a happy number.
+
+def happy_number(num):
+    slow, fast = num, num
+    while True:
+        slow = square_sum(slow)
+        fast = square_sum(square_sum(fast))
+        if slow == fast:
+            break
+    return slow == 1
+
+def square_sum(num):
+    _sum = 0
+
+    while num > 0:
+        digit = num % 10
+        _sum += digit * digit
+        num //= 10
+    return _sum
+
+
+result_3 = happy_number(1000)
+
 def main():
     result_1()
+    result_2()
+    print("Happy Number: ", result_3)
 
-    
 
 main()
