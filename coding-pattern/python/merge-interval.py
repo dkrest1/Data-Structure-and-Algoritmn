@@ -1,5 +1,5 @@
 
-#/////////////////////////////////// Merge Intervals (medium) /////////////////////////////////////////////
+# /////////////////////////////////// Merge Intervals (medium) /////////////////////////////////////////////
 # Problem Statement #
 # Given a list of intervals, merge all the overlapping intervals to produce a list that has only mutually exclusive intervals.
 
@@ -7,7 +7,7 @@
 
 # Intervals: [[1,4], [2,5], [7,9]]
 # Output: [[1,5], [7,9]]
-# Explanation: Since the first two intervals [1,4] and [2,5] overlap, we merged them into 
+# Explanation: Since the first two intervals [1,4] and [2,5] overlap, we merged them into
 # one [1,5]
 
 # Example 2:
@@ -26,9 +26,10 @@ class Interval:
     def __init__(self, start, end):
         self.start = start
         self.end = end
-    
+
     def print_interval(self):
-        print("[" + str(self.start)  + "," + str(self.end) + "]", end="")
+        print("[" + str(self.start) + "," + str(self.end) + "]", end="")
+
 
 def merge(intervals):
     if len(intervals) < 2:
@@ -47,9 +48,10 @@ def merge(intervals):
             merged_intervals.append(Interval(start, end))
             start = interval.start
             end = interval.end
-    
-    merged_intervals.append(Interval(start,end))
+
+    merged_intervals.append(Interval(start, end))
     return merged_intervals
+
 
 def result_1():
     print("Merged Interval ", end="")
@@ -67,7 +69,7 @@ def result_1():
     print()
 
 
-# //////////////////////////Insert Interval (medium)/////////////////////////////////////////   
+# //////////////////////////Insert Interval (medium)/////////////////////////////////////////
 
 # Problem Statement #
 # Given a list of non-overlapping intervals sorted by their start time, insert a given interval at the correct position and merge all necessary intervals to produce a list that has only mutually exclusive intervals.
@@ -87,7 +89,7 @@ def result_1():
 # Input: Intervals=[[2,3],[5,7]], New Interval=[1,4]
 # Output: [[1,4], [5,7]]
 # Explanation: After insertion, since [1,4] overlaps with [2,3], we merged them into one [1,4].
- 
+
 def insert(intervals, new_interval):
     i, start, end = 0, 0, 1
     merged = []
@@ -98,8 +100,8 @@ def insert(intervals, new_interval):
     while i < len(intervals) and intervals[i][start] <= new_interval[end]:
         new_interval[start] = min(intervals[i][start], new_interval[start])
         new_interval[end] = max(intervals[i][end], new_interval[end])
-        i +=1
-    
+        i += 1
+
     merged.append(new_interval)
 
     while i < len(intervals):
@@ -107,11 +109,52 @@ def insert(intervals, new_interval):
         i += 1
     return merged
 
-result_2 = insert([[2,3],[5,7]], [1, 4])
+
+result_2 = insert([[2, 3], [5, 7]], [1, 4])
+
+
+# //////////////////////////////////////////////////// Intervals Intersection (medium) //////////////////////////////////
+# Problem Statement #
+# Given two lists of intervals, find the intersection of these two lists. Each list consists of disjoint intervals sorted on their start time.
+
+# Example 1:
+
+# Input: arr1=[[1, 3], [5, 6], [7, 9]], arr2=[[2, 3], [5, 7]]
+# Output: [2, 3], [5, 6], [7, 7]
+# Explanation: The output list contains the common intervals between the two lists.
+# Example 2:
+
+# Input: arr1=[[1, 3], [5, 7], [9, 12]], arr2=[[5, 10]]
+# Output: [5, 7], [9, 10]
+# Explanation: The output list contains the common intervals between the two lists.
+
+def merge_intersection(arr1, arr2):
+    i, j, start, end = 0, 0, 0, 1
+    result = []
+
+    while i < len(arr1) and j < len(arr2):
+        a_intersect_b = arr1[i][start] >= arr2[j][start] and arr1[i][start] <= arr2[j][end]
+        b_intersect_a = arr2[j][start] >= arr1[i][start] and arr2[j][start] <= arr1[i][end]
+
+        if a_intersect_b or b_intersect_a:
+            result.append([max(arr1[i][start], arr2[j][start]),
+                          min(arr1[i][end], arr2[j][end])])
+
+        if arr1[i][end] < arr2[j][end]:
+            i += 1
+        else:
+            j += 1
+
+    return result
+
+
+result_3 = merge_intersection([[1, 3], [5, 7], [9, 12]], arr2=[[5, 10]])
 
 
 def main():
     result_1()
     print("Insert and merged interval at ", result_2)
+    print("Interval intersection", result_3)
+
 
 main()
