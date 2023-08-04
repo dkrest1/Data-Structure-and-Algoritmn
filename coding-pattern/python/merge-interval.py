@@ -171,7 +171,7 @@ result_3 = merge_intersection([[1, 3], [5, 7], [9, 12]], arr2=[[5, 10]])
 # Explanation: Since [4,5] and [3,6] overlap, a person cannot attend both of these appointments.
 
 
-#
+
 
 def main():
     result_1()
