@@ -82,9 +82,91 @@ function findMissingNumber(arr) {
 
 const result2 = findMissingNumber([8, 3, 5, 2, 4, 6, 0, 1])
 
+// Find all Missing Numbers (easy)
+
+// Problem Statement #
+// We are given an unsorted array containing numbers taken from the range 1 to ‘n’. The array can have duplicates, which means some numbers will be missing. Find all those missing numbers.
+
+// Example 1:
+
+// Input: [2, 3, 1, 8, 2, 3, 5, 1]
+// Output: 4, 6, 7
+// Explanation: The array should have all numbers from 1 to 8, due to duplicates 4, 6, and 7 are missing.
+// Example 2:
+
+// Input: [2, 4, 1, 2]
+// Output: 3
+// Example 3:
+
+// Input: [2, 3, 2, 1]
+// Output: 4
+
+function findMissingNumbers(arr) {
+    let i = 0
+    while (i < arr.length) {
+        let j = arr[i] - 1
+
+        if (arr[i] !== arr[j]) {
+            [arr[i], arr[j]] = [arr[j], arr[i]]
+        } else {
+            i += 1
+        }
+    }
+
+    const missingNumbers = []
+
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] !== i + 1) {
+            missingNumbers.push(i + 1)
+        }
+    }
+
+    return missingNumbers
+}
+
+const result3 = findMissingNumbers([2, 3, 2, 1])
+
+/////////////////////////////////// Find the Duplicate Number (easy)////////////////
+// Problem Statement #
+// We are given an unsorted array containing ‘n+1’ numbers taken from the range 1 to ‘n’. The array has only one duplicate but it can be repeated multiple times. Find that duplicate number without using any extra space. You are, however, allowed to modify the input array.
+
+// Example 1:
+
+// Input: [1, 4, 4, 3, 2]
+// Output: 4
+// Example 2:
+
+// Input: [2, 1, 3, 3, 5, 4]
+// Output: 3
+// Example 3:
+
+// Input: [2, 4, 1, 4, 4]
+// Output: 4
+
+function findDuplicate(arr) {
+    let i = 0
+    while (i < arr.length) {
+        if (arr[i] !== i + 1) {
+            let j = arr[i] - 1
+            if (arr[i] !== arr[j]) {
+                [arr[i], arr[j]] = [arr[j], arr[i]]
+            } else {
+                return arr[i]
+            }
+        } else {
+            i += 1
+        }
+    }
+    return -1
+}
+
+const result4 = findDuplicate([2, 1, 3, 3, 5, 4])
+
 function main() {
     console.log("result_one", result1)
     console.log("result_two", result2)
+    console.log("result_three", result3)
+    console.log("result_four", result4)
 }
 
 main()
