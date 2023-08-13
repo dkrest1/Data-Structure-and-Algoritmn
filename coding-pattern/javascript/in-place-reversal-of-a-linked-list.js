@@ -75,6 +75,50 @@ function reverseSubList(head, node1, node2) {
 
 }
 
+// Reverse every K-element Sub-list (medium)
+
+function reverse_every_k_element(head, k) {
+    if (k <= 1 || head === null) {
+        return head
+    }
+
+    let previous = null
+    let current = head
+
+    while (true) {
+        const last_node_of_the_previous_list = previous;
+        const last_node_of_the_sub_list = current
+        let next = null
+
+        let i = 0
+
+        while (current !== null && i < k) {
+            next = current.next
+            current.next = previous
+            previous = current
+            current = next
+            i += 1
+        }
+
+        if (last_node_of_the_previous_list !== null) {
+            last_node_of_the_previous_list.next = previous
+        } else {
+            head = previous
+        }
+
+        last_node_of_the_sub_list.next = current
+
+        if (current !== null) {
+            break
+        }
+
+        previous = last_node_of_the_sub_list
+    }
+
+    return head
+
+}
+
 
 function main() {
     const head = new Node(1)
@@ -82,10 +126,13 @@ function main() {
     head.next.next = new Node(3)
     head.next.next.next = new Node(4)
     head.next.next.next.next = new Node(5)
+    head.next.next.next.next.next = new Node(6)
+    head.next.next.next.next.next.next = new Node(7)
+    head.next.next.next.next.next.next.next = new Node(8)
 
     process.stdout.write("Node of the original LinkedList are: ")
     head.print_list()
-    let result = reverseSubList(head, 2, 4)
+    let result = reverse_every_k_element(head, 3)
     process.stdout.write("Node of the reversed LinkedList are: ")
     result.print_list()
 
