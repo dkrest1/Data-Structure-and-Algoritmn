@@ -70,21 +70,65 @@ function traverse(root) {
 
         for (let i = 0; i < queueLength; i++) {
             let currentNode = queue.dequeue()
-            currentLevel.push(currentNode);
 
-            if (currentNode.first !== null) {
-                queue.enqueue(currentNode)
+            currentLevel.push(currentNode.val);
+
+            if (currentNode.left !== null) {
+                queue.enqueue(currentNode.left)
             }
 
-            if (currentNode.last !== null) {
-                queue.enqueue(currentNode)
+            if (currentNode.right !== null) {
+                queue.enqueue(currentNode.right)
             }
 
-            result.push(currentLevel)
         }
 
-        return result
+        result.push(currentLevel)
+
     }
+
+    return result
+}
+
+// ///////////////////////// Reverse Level Order Traversal (easy) ///////////////////////////////////
+// Problem Statement #
+// Given a binary tree, populate an array to represent its level-by-level traversal in reverse order, i.e., the lowest level comes first. You should populate the values of all nodes in each level from left to right in separate sub-arrays.
+
+function traverse_reverse(root) {
+    let result = []
+
+    if (root === null) {
+        return null
+    }
+
+    const queue = new Queue()
+    queue.enqueue(root)
+
+    while (queue.size > 0) {
+        const queueLength = queue.size
+        const currentLevel = []
+
+        for (let i = 0; i < queueLength; i++) {
+            let currentNode = queue.dequeue()
+
+            currentLevel.push(currentNode.val);
+
+            if (currentNode.left !== null) {
+                queue.enqueue(currentNode.left)
+            }
+
+            if (currentNode.right !== null) {
+                queue.enqueue(currentNode.right)
+            }
+
+        }
+
+        console.log(currentLevel)
+
+        result.unshift(currentLevel)
+    }
+
+    return result
 }
 
 function main() {
@@ -94,8 +138,8 @@ function main() {
     root.left.left = new Node(9)
     root.right.left = new Node(10)
     root.right.right = new Node(5)
-    console.log(`Breath first transversal of a tree: ${traverse(root)}`)
+    console.log(`Breath first transversal of a tree: ${traverse_reverse(root)}`)
 
 }
 
-function main()
+main()
