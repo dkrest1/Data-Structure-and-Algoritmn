@@ -130,14 +130,76 @@ function traverse_reverse(root) {
     return result
 }
 
+// ///////////////////////////////////// Zigzag Traversal (medium) //////////////////////////////
+
+// Problem Statement #
+// Given a binary tree, populate an array to represent its zigzag level order traversal. You should populate the values of all nodes of the first level from left to right, then right to left for the next level and keep alternating in the same manner for the following levels.
+
+// Example 1
+function traverse_zigzag(root) {
+    let result = []
+
+    if (root === null) {
+        return result
+    }
+
+    const queue = new Queue()
+    queue.enqueue(root)
+    let leftToRight = true
+
+    while (queue.size > 0) {
+        let queueLength = queue.size
+        let currentLevel = []
+
+        for (let i = 0; i < queueLength; i++) {
+            let currentNode = queue.dequeue()
+
+            if (leftToRight) {
+                currentLevel.push(currentNode.val)
+            } else {
+                currentLevel.unshift(currentNode.val)
+            }
+
+            if (currentNode.left !== null) {
+                queue.enqueue(currentNode.left)
+            }
+
+            if (currentNode.right !== null) {
+                queue.enqueue(currentNode.right)
+            }
+
+        }
+
+        result.push(currentLevel)
+        leftToRight = !leftToRight
+    }
+
+    return result
+
+}
+
+
+// Level Averages in a Binary Tree (easy)
+// Problem Statement #
+// Given a binary tree, populate an array to represent the averages of all of its levels.
+
+
+function find_level_average(root) {
+
+}
+
+
 function main() {
     const root = new Node(12)
     root.left = new Node(7)
     root.right = new Node(1)
     root.left.left = new Node(9)
+    root.left.right = new Node(2)
     root.right.left = new Node(10)
     root.right.right = new Node(5)
-    console.log(`Breath first transversal of a tree: ${traverse_reverse(root)}`)
+    // root.right.left.left = new Node(20)
+    // root.right.left.right = new Node(17)
+    console.log(`Breath first transversal of a tree: ${traverse_zigzag(root)}`)
 
 }
 
