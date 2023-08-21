@@ -185,7 +185,32 @@ function traverse_zigzag(root) {
 
 
 function find_level_average(root) {
+    let result = []
+    if (root === null) {
+        return result
+    }
 
+    const queue = new Queue()
+    queue.enqueue(root)
+    while (queue.size > 0) {
+        let queueLength = queue.size
+        let levelSum = 0.0
+        for (let i = 0; i < queueLength; i++) {
+            let currentNode = queue.dequeue()
+            levelSum += currentNode.val
+            if (currentNode.left !== null) {
+                queue.enqueue(currentNode.left)
+            }
+
+            if (currentNode.right !== null) {
+                queue.enqueue(currentNode.right)
+            }
+        }
+
+        result.push(levelSum / queueLength)
+    }
+
+    return result
 }
 
 
@@ -199,7 +224,7 @@ function main() {
     root.right.right = new Node(5)
     // root.right.left.left = new Node(20)
     // root.right.left.right = new Node(17)
-    console.log(`Breath first transversal of a tree: ${traverse_zigzag(root)}`)
+    console.log(`Breath first transversal of a tree: ${find_level_average(root)}`)
 
 }
 
