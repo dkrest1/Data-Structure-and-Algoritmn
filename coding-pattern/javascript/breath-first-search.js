@@ -222,7 +222,7 @@ function main() {
     root.left.right = new Node(2)
     root.right.left = new Node(10)
     root.right.right = new Node(5)
-    // root.right.left.left = new Node(20)
+    root.right.left.left = new Node(20)
     // root.right.left.right = new Node(17)
     console.log(`Breath first transversal of a tree: ${find_level_average(root)}`)
 
