@@ -85,16 +85,17 @@ function find_permutation(nums) {
     const result = []
     // your code here
     let permutation = new Deque()
+    permutation.push([])
     for(let i = 0; i < nums.length; i++) {
         const currentNum = nums[i]
-        const n = permutation.length
-        for(const p = 0; p < n; p++) {
-            const oldPermutation = permutation.shift()
+        let n = permutation.length
+        for(let p = 0; p < n; p++) {
+            let oldPermutation = permutation.shift()
 
             for(let j= 0; j < oldPermutation.length + 1; j++) {
                 const newPermutation = oldPermutation.slice(0)
                 newPermutation.splice(j, 0, currentNum)
-                if(newPermutation.length = nums.length) {
+                if(newPermutation.length === nums.length) {
                     result.push(newPermutation)
                 }else {
                     permutation.push(newPermutation)
@@ -105,24 +106,16 @@ function find_permutation(nums) {
     return result
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
 function main() {
     // const result1 = find_subsets([1, 5, 3])
     // result1.forEach(subset => console.log(subset))
 
-    const result2 = remove_duplicate_from_subset([1,5, 3, 3])
-    result2.forEach(subset => console.log(subset))
+    // const result2 = remove_duplicate_from_subset([1,5, 3, 3])
+    // result2.forEach(subset => console.log(subset))
+
+    const result3 = find_permutation([1, 3, 5])
+    console.log(result3)
+
 }
 
 main()
