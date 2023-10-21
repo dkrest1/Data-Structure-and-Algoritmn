@@ -1,3 +1,5 @@
+const Deque = require("collections/deque")
+
 ////////////////////////////////// Subset Easy //////////////////////////////////////
 // Problem Statement #
 // Given a set with distinct elements, find all of its distinct subsets.
@@ -69,6 +71,50 @@ function remove_duplicate_from_subset(nums) {
 
     return subsets
 }
+
+//////////////////////////////////////////// Permutations (medium) //////////////////////////////////////
+// Problem Statement #
+// Given a set of distinct numbers, find all of its permutations.
+
+// Example 1:
+
+// Input: [1,3,5]
+// Output: [1,3,5], [1,5,3], [3,1,5], [3,5,1], [5,1,3], [5,3,1]
+
+function find_permutation(nums) {
+    const result = []
+    // your code here
+    let permutation = new Deque()
+    for(let i = 0; i < nums.length; i++) {
+        const currentNum = nums[i]
+        const n = permutation.length
+        for(const p = 0; p < n; p++) {
+            const oldPermutation = permutation.shift()
+
+            for(let j= 0; j < oldPermutation.length + 1; j++) {
+                const newPermutation = oldPermutation.slice(0)
+                newPermutation.splice(j, 0, currentNum)
+                if(newPermutation.length = nums.length) {
+                    result.push(newPermutation)
+                }else {
+                    permutation.push(newPermutation)
+                }
+            }
+        }
+    }
+    return result
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 function main() {
